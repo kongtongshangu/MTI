@@ -53,10 +53,10 @@ Step 2: Create JSON files for evaluation
 ```bash
 python data_process/create_video_audio_json.py --video_c_type gaussian_noise --audio_c_type crowd --severity 5 --json_root ./json_csv_files/ks50
 ```
-Note:
-Remember to change the --clean-path --video-c-path --audio-c-path to adapt your own case. \
-You can download the original data from [here](https://drive.google.com/drive/folders/1SWkNwTqI08xbNJgz-YU2TwWHPn5Q4z5b). \
-For more details on data preparation, please refer to [READ](https://github.com/XLearning-SCU/2024-ICLR-READ). \
+### Note: \\
+#### Remember to change the --clean-path --video-c-path --audio-c-path to adapt your own case. \
+#### You can download the original data from [here](https://drive.google.com/drive/folders/1SWkNwTqI08xbNJgz-YU2TwWHPn5Q4z5b). \
+#### For more details on data preparation, please refer to [READ](https://github.com/XLearning-SCU/2024-ICLR-READ). \
 
 ### Prepare Pre-trained Models
 
@@ -71,3 +71,7 @@ mkdir -p pretrained
 ## Run Test-Time Adaptation
 Example: Kinetics50-MC, both modalities corrupted
 CUDA_VISIBLE_DEVICES=0 python run.py --dataset ks50 --tta-method OURS --pretrain_path ./pretrained/cav_mae_ks50.pth --corruption-modality both --audio_c_type crowd
+
+## Acknowledgement
+- PTA code is heavily used. [official](https://github.com/MPI-Lab/PTA)
+- READ code is heavily used. [official](https://github.com/XLearning-SCU/2024-ICLR-READ)
