@@ -1,7 +1,5 @@
 # Modulate-Then-Integrate: Redefining Instance Features for Multi-Modal Test-Time Adaptation (MTI)
 
-This repository contains the **official implementation** of **MTI**, a multi-modal test-time adaptation (MM-TTA) method designed for **simultaneous multimodal domain shifts**.
-
 ---
 
 ## Framework
