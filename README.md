@@ -1,7 +1,5 @@
 # Modulate-Then-Integrate: Redefining Instance Features for Multi-Modal Test-Time Adaptation (MTI)
 
----
-
 ## Framework
 
 <p align="center">
