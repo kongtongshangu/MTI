@@ -4,6 +4,12 @@ This repository contains the **official implementation** of **MTI**, a multi-mod
 
 ---
 
+## Framework
+
+<p align="center">
+  <img src="./Framework.png" width="95%">
+</p>
+
 ## Overview
 
 Multi-modal models often degrade under distribution shifts at deployment time. Prior MM-TTA methods typically adapt by recalibrating **fusion attention**, which can fail when **all modalities are corrupted simultaneously** (no reliable anchor modality).  
@@ -15,12 +21,6 @@ MTI consists of two key components:
 - **SEM (Stratified Entropy Modulation)**: reliability-aware optimization that stabilizes adaptation under overconfidence and bias.
 
 ---
-
-## Framework
-
-<p align="center">
-  <img src="./Framework.png" width="95%">
-</p>
 
 > 🔥 Tunable modules: IAMA (router + experts + gating)  
 > ❄️ Frozen modules: encoders, fusion layer, and classifier (default setting)
