@@ -32,28 +32,37 @@ Install dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
 
 ### Prepare Data
 
 We follow the multi-modal corruption protocol used in prior MM-TTA works (15 video corruptions × 6 audio corruptions = 90 combinations).
 
 Step 1: Generate corrupted video/audio data
+```bash
 # Video corruptions
 python data_process/make_c_video.py --corruption gaussian_noise --severity 5 --data-path /path/to/video_val
+```
 
+```bash
 # Audio corruptions
 python data_process/make_c_audio.py --corruption crowd --severity 5 --data-path /path/to/audio_val
+```
 
 Step 2: Create JSON files for evaluation
+```bash
 python data_process/create_video_audio_json.py --video_c_type gaussian_noise --audio_c_type crowd --severity 5 --json_root ./json_csv_files/ks50
+```
 
 ### Prepare Pre-trained Models
 
 Download pre-trained checkpoints and place them under ./pretrained/:
 
+```bash
 mkdir -p pretrained
 # Put your checkpoint here:
 # pretrained/cav_mae_ks50.pth
+```
 
 ## Run Test-Time Adaptation
 Example: Kinetics50-MC, both modalities corrupted
