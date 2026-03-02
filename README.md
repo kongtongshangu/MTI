@@ -6,13 +6,7 @@
 
 ## Overview
 
-Multi-modal models often degrade under distribution shifts at deployment time. Prior MM-TTA methods typically adapt by recalibrating **fusion attention**, which can fail when **all modalities are corrupted simultaneously** (no reliable anchor modality).  
-**MTI** tackles this challenge by **modulating instance-level representations before fusion**, and then integrating the corrected tokens for robust predictions.
-
-MTI consists of two key components:
-
-- **IAMA (Instance-Aware Mixture-of-Experts Adapter)**: instance-specific token modulation via expert mixing and lightweight routing.
-- **SEM (Stratified Entropy Modulation)**: reliability-aware optimization that stabilizes adaptation under overconfidence and bias.
+Multi-modal test-time adaptation (MM-TTA) aims to mitigate distribution shifts by exploiting multi-modal information without accessing source data. Recent advances in this field primarily rely on attention-guided fusion, which is effective under unimodal shifts but becomes fundamentally limited under simultaneous multi-modal shifts. This limitation stems from the collapse of attention discrimination in the absence of a relatively reliable modality, leading to degenerate fusion representations. To address this, we propose Modulate-Then-Integrate (MTI), a novel MM-TTA method that focuses on instance-level feature modulation before multi-modal fusion. Specifically, MTI consists of two key components: Instance-Aware Mixture-of-Experts Adapter (IAMA) and Stratified Entropy Modulation (SEM). IAMA maintains a set of expert adapters and generates instance-specific expert weights through a lightweight routing network based on each instance’s contextual features, enabling adaptive instance-level feature modulation. The modulated features are then integrated across modalities in the fusion module to produce the final predictions. SEM complements IAMA by stratifying test samples according to their reliability and applying stratum-dependent entropy modulation, providing a stable optimization signal that guides the adaptive modulation. Extensive experiments demonstrate that MTI  outperforms state-of-the-art methods, achieving gains of 3.4\% and 2.0\% on VGGSound-MC and Kinetics50-MC, respectively.
 
 ---
 
