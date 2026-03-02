@@ -15,15 +15,6 @@ Multi-modal test-time adaptation (MM-TTA) aims to mitigate distribution shifts b
 
 ---
 
-## Key Methods
-
-- **Instance-Aware Mixture-of-Experts Adapter (IAMA)**
-  - Maintains an expert pool for each modality and produces instance-specific expert weights for token modulation.
-- **Stratified Entropy Modulation (SEM)**
-  - Stratifies samples by reliability and applies stratum-specific entropy objectives to stabilize test-time updates.
-
----
-
 ## Getting Started
 
 ### Requirements
@@ -41,3 +32,29 @@ Install dependencies:
 
 ```bash
 pip install -r requirements.txt
+
+### Prepare Data
+
+We follow the multi-modal corruption protocol used in prior MM-TTA works (15 video corruptions × 6 audio corruptions = 90 combinations).
+
+Step 1: Generate corrupted video/audio data
+# Video corruptions
+python data_process/make_c_video.py --corruption gaussian_noise --severity 5 --data-path /path/to/video_val
+
+# Audio corruptions
+python data_process/make_c_audio.py --corruption crowd --severity 5 --data-path /path/to/audio_val
+
+Step 2: Create JSON files for evaluation
+python data_process/create_video_audio_json.py --video_c_type gaussian_noise --audio_c_type crowd --severity 5 --json_root ./json_csv_files/ks50
+
+### Prepare Pre-trained Models
+
+Download pre-trained checkpoints and place them under ./pretrained/:
+
+mkdir -p pretrained
+# Put your checkpoint here:
+# pretrained/cav_mae_ks50.pth
+
+## Run Test-Time Adaptation
+Example: Kinetics50-MC, both modalities corrupted
+CUDA_VISIBLE_DEVICES=0 python run.py --dataset ks50 --tta-method OURS --pretrain_path ./pretrained/cav_mae_ks50.pth --corruption-modality both --audio_c_type crowd
